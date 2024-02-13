@@ -35,7 +35,7 @@ const bucket = {
 //NOTE: Object.entries return a array [] which is consist of arrays of all the key values present in the object
 
 const entries = Object.entries(bucket);
-console.log(entries);
+// console.log(entries);
 for (const [key, value] of entries) {
   if (value > 20) {
     return [value, key];
@@ -53,6 +53,9 @@ const productsBuy = [
   { name: 'keyboard', price: 849 },
 ];
 
-const highestBuy = productsBuy.filter((item) => {
-  return item.price;
-});
+function compare(a, b) {
+  return a.price - b.price;
+}
+
+productsBuy.sort(compare);
+console.log(productsBuy);

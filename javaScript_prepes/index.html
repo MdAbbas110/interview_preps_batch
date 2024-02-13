@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .dada {
+        padding: 60px;
+        width: 750px;
+        border: 1px solid black;
+      }
+      .category {
+        padding: 50px;
+        width: 550px;
+        border: 1px solid rgb(209, 112, 112);
+      }
+      li {
+        padding: 10px;
+      }
+      .beta {
+        padding: 30px;
+        width: 450px;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dada">
+      hello
+      <ul class="category">
+        <p>items</p>
+        <li id="lappy">Laptop</li>
+        <li id="shoe">shoes</li>
+        <li id="cam">camera</li>
+        <li id="phone">phone</li>
+      </ul>
+    </div>
+
+    <script>
+      const shoe = document.getElementById('shoe');
+      document.querySelector('.dada').addEventListener('click', (e) => {
+        console.log('dada click');
+      });
+
+      document.querySelector('.category').addEventListener('click', (e) => {
+        console.log(e.target.id);
+        if (e.target.id === 'shoe') {
+          shoe.style.color = 'red';
+          shoe.style.fontSize = '1.5rem';
+        }
+        e.stopPropagation();
+      });
+    </script>
+  </body>
+</html>
+
+<!-- event delegation is something that can be archive by the event bubbling
+concept in js in this what we use to do is we put the click event on the parent
+and ary to access the inner child via the e.target method on the children 
+just by one event handler we can handle multiple event by e object, keeping the click event on the parent and just using e bubbling and taking action -->
