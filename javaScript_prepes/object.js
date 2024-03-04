@@ -35,12 +35,59 @@ const bucket = {
 //NOTE: Object.entries return a array [] which is consist of arrays of all the key values present in the object
 
 const entries = Object.entries(bucket);
-// console.log(entries);
+
+/*
 for (const [key, value] of entries) {
   if (value > 20) {
     return [value, key];
   }
 }
+ console.log(entries);
+*/
+
+// 5 Nested Object Count: Create a program that takes a nested object representing a family tree. Write a function that recursively counts the total number of family members in the tree.
+const familyTree = {
+  name: 'Grandfather',
+  children: [
+    {
+      name: 'Father',
+      children: [
+        {
+          name: 'Child 1',
+          children: [],
+        },
+        {
+          name: 'Child 2',
+          children: [
+            {
+              name: 'Grandchild 1',
+              children: [],
+            },
+            {
+              name: 'Grandchild 2',
+              children: [],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'Uncle',
+      children: [
+        {
+          name: 'Cousin 1',
+          children: [],
+        },
+        {
+          name: 'Cousin 2',
+          children: [],
+        },
+      ],
+    },
+  ],
+};
+
+function countFamilyMembers(object) {}
 
 // 6 Object Sorting: Write a program that takes an array of objects representing products with name and price properties. Sort the products by price in ascending order.
 
@@ -58,4 +105,4 @@ function compare(a, b) {
 }
 
 productsBuy.sort(compare);
-console.log(productsBuy);
+// console.log(productsBuy);
