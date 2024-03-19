@@ -31,6 +31,11 @@ const commentsData = [
     comment: 'Lorem ipsum 6',
     subComments: [],
   },
+  {
+    id: 6,
+    comment: 'Lorem ipsum 7',
+    subComments: [],
+  },
 ];
 
 export default commentsData;
