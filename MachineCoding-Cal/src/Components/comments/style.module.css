@@ -1,0 +1,17 @@
+.commentContainer {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 5px;
+
+    .controls {
+        color: blue;
+        font-size: 12px;
+        align-items: center;
+        span {
+            margin-right: 4px;
+            cursor: pointer;
+        }
+    }
+}
