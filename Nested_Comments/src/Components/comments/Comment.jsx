@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import styles from './style.module.css';
+import Box from '@mui/joy/Box';
+import Textarea from '@mui/joy/Textarea';
 
 const CommentItem = ({ comment, addNewReply }) => {
   const [showReply, toggleReply] = useState(false);
@@ -40,13 +42,14 @@ const CommentItem = ({ comment, addNewReply }) => {
         <Comment commentData={comment.subComments} addNewReply={addNewReply} />
       )}
       {showAddReply && (
-        <input
+        <Textarea
           autoFocus
           onBlur={handleBlur}
           onKeyDown={handleKeyDown}
           className={styles.replyBox}
           type="text"
           placeholder="enter you savage reply!"
+          minRows={3}
         />
       )}
     </div>
@@ -55,7 +58,14 @@ const CommentItem = ({ comment, addNewReply }) => {
 
 const Comment = ({ commentData, addNewReply }) => {
   return (
-    <>
+    <Box
+      height="auto"
+      width={'auto'}
+      my={4}
+      gap={4}
+      p={2}
+      sx={{ border: '2px solid grey' }}
+    >
       {commentData.map((comment) => (
         <CommentItem
           comment={comment}
@@ -63,7 +73,7 @@ const Comment = ({ commentData, addNewReply }) => {
           addNewReply={addNewReply}
         />
       ))}
-    </>
+    </Box>
   );
 };
 
