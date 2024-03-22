@@ -2,6 +2,8 @@ import { useState } from 'react';
 import styles from './style.module.css';
 import Box from '@mui/joy/Box';
 import Textarea from '@mui/joy/Textarea';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 
 const CommentItem = ({ comment, addNewReply }) => {
   const [showReply, toggleReply] = useState(false);
@@ -32,10 +34,18 @@ const CommentItem = ({ comment, addNewReply }) => {
         </div>
         <div className={styles.controls}>
           {comment.subComments.length > 0 && (
-            <span onClick={() => toggleReply(!showReply)}>View Reply</span>
+            <span onClick={() => toggleReply(!showReply)}>
+              <ArrowDropDownIcon />
+            </span>
           )}
 
-          <span onClick={() => toggleAddReply(!showAddReply)}>Add Reply</span>
+          <span
+            className="flex items-center"
+            onClick={() => toggleAddReply(!showAddReply)}
+          >
+            Reply
+            <DriveFileRenameOutlineIcon />
+          </span>
         </div>
       </div>
       {showReply && (
@@ -48,7 +58,7 @@ const CommentItem = ({ comment, addNewReply }) => {
           onKeyDown={handleKeyDown}
           className={styles.replyBox}
           type="text"
-          placeholder="enter you savage reply!"
+          placeholder="Study Martial for FrontEnd!"
           minRows={3}
         />
       )}
@@ -58,14 +68,7 @@ const CommentItem = ({ comment, addNewReply }) => {
 
 const Comment = ({ commentData, addNewReply }) => {
   return (
-    <Box
-      height="auto"
-      width={'auto'}
-      my={4}
-      gap={4}
-      p={2}
-      sx={{ border: '2px solid grey' }}
-    >
+    <Box height="auto" width={'auto'} my={4} gap={4} p={2} sx={{}}>
       {commentData.map((comment) => (
         <CommentItem
           comment={comment}
