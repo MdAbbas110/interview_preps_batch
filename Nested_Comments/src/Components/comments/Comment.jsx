@@ -6,14 +6,19 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 
 const CommentItem = ({ comment, addNewReply }) => {
-  const [showReply, toggleReply] = useState(false);
-  const [showAddReply, toggleAddReply] = useState(false);
+  const [showReply, setShowReply] = useState(false);
+  const [showAddReply, setShowAddReply] = useState(false);
+
+  const toggleReply = () => setShowReply(!showReply);
+  const toggleAddReply = () => setShowAddReply(!showAddReply);
 
   const addCommentsUtils = (e) => {
-    const newComment = e.target.value;
-    addNewReply(comment.id, newComment);
-    toggleAddReply(false);
-    toggleReply(true);
+    const newComment = e.target.value.trim(); // Remove leading and trailing whitespace
+    if (newComment) {
+      addNewReply(comment.id, newComment);
+      setShowAddReply(false);
+      setShowReply(true);
+    }
   };
 
   const handleBlur = (e) => {
@@ -21,30 +26,31 @@ const CommentItem = ({ comment, addNewReply }) => {
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter' || e.keyCode === 13) {
-      addCommentsUtils(e);
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault(); // Prevent default behavior (form submission)
+      addCommentsUtils(e); // Call the function to add comment
     }
+  };
+
+  const handleCommentClick = () => {
+    toggleAddReply();
   };
 
   return (
     <div className={styles.commentContainer}>
-      <div className={styles.details}>
+      <div className={styles.details} onClick={handleCommentClick}>
         <div>
           <h3>{comment.comment}</h3>
         </div>
         <div className={styles.controls}>
           {comment.subComments.length > 0 && (
-            <span onClick={() => toggleReply(!showReply)}>
+            <span onClick={toggleReply}>
               <ArrowDropDownIcon />
             </span>
           )}
 
-          <span
-            className="flex items-center"
-            onClick={() => toggleAddReply(!showAddReply)}
-          >
-            Reply
-            <DriveFileRenameOutlineIcon />
+          <span className="flex items-center" onClick={toggleAddReply}>
+            Reply <DriveFileRenameOutlineIcon />
           </span>
         </div>
       </div>
@@ -58,7 +64,7 @@ const CommentItem = ({ comment, addNewReply }) => {
           onKeyDown={handleKeyDown}
           className={styles.replyBox}
           type="text"
-          placeholder="Study Martial for FrontEnd!"
+          placeholder="Add a new note..."
           minRows={3}
         />
       )}
@@ -68,7 +74,7 @@ const CommentItem = ({ comment, addNewReply }) => {
 
 const Comment = ({ commentData, addNewReply }) => {
   return (
-    <Box height="auto" width={'auto'} my={4} gap={4} p={2} sx={{}}>
+    <Box>
       {commentData.map((comment) => (
         <CommentItem
           comment={comment}
